@@ -5,7 +5,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BinaryTree<T> {
+public class BinaryTree<T extends Comparable> {
 	private BTNode<T> head;
 	
 	public BinaryTree(BTNode<T> head) {
