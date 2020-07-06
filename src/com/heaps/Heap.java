@@ -3,7 +3,9 @@ package com.heaps;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class Heap<T extends Comparable<T>> {
+import com.heaps.Heap.HeapType;
+
+public class Heap<T extends Comparable<T>> {
 
 	/*
 	 * Heap is a complete binary tree.
@@ -117,8 +119,61 @@ public abstract class Heap<T extends Comparable<T>> {
 		percolateUp(getCount() - 1);
 	}
 	
-	public abstract void percolateDown(int i);
-	
-	public abstract void percolateUp(int i);
-	
+	public void percolateDown(int i) {
+		while(i < getCount()) {
+			int leftChildIndex = getLeftChildIndex(i);
+			int rightChildIndex = getRightChildIndex(i);
+			int posToBeSwappedWith = i;
+			T iVal = getArr().get(i);
+			if(leftChildIndex != -1 && compare(getArr().get(leftChildIndex), iVal) ) {
+				posToBeSwappedWith = leftChildIndex;
+			} 
+			
+			if(rightChildIndex != -1 && compare(getArr().get(rightChildIndex), getArr().get(posToBeSwappedWith)) ) {
+				posToBeSwappedWith = rightChildIndex;
+			}
+			
+			if(posToBeSwappedWith != i) {
+				T temp = getArr().get(posToBeSwappedWith);
+				getArr().set(posToBeSwappedWith, iVal);
+				getArr().set(i, temp);
+				i = posToBeSwappedWith;
+			} else {
+				break;
+			}
+			
+		}
+		
+	}
+
+
+	private boolean compare(T t, T t2) {
+		if(getType() == HeapType.MAX_HEAP) {
+			return t.compareTo(t2) > 0;
+		} else {
+			return t.compareTo(t2) < 0;
+		}
+		
+	}
+
+	public void percolateUp(int i) {
+		while(i != 0) {
+			T iVal = getArr().get(i);
+			int parentIndex = getParentPos(i);
+			if(parentIndex != -1) {
+				T parentVal = getArr().get(parentIndex);
+				if(compare(iVal, parentVal)) {
+					// swap child with parent 
+					getArr().set(parentIndex, iVal);
+					getArr().set(i, parentVal);
+					i = parentIndex;
+				} else {
+					break;
+				}
+			} else {
+				break;
+			}
+		}
+		
+	}
 }
