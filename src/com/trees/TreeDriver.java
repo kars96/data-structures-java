@@ -11,6 +11,21 @@ public class TreeDriver {
 		head.getLeft().getLeft().setRight(new BTNode<String>("a"));
 		BinaryTree<String> binaryTree = new BinaryTree<String>(head);
 		binaryTree.inOrderTraversal();
+		
+		try {
+			BinaryTree<String> bt2 = (BinaryTree<String>)binaryTree.clone();
+			System.out.println(bt2.equals(binaryTree));
+			bt2.getHead().getLeft().setData("M");
+			System.out.println(bt2.equals(binaryTree));
+
+			bt2.inOrderTraversal();
+			System.out.println();
+			
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		binaryTree.inOrderTraversalIterative();
 		System.out.println();
 		binaryTree.preOrderTraversal();
@@ -20,6 +35,8 @@ public class TreeDriver {
 		System.out.println(binaryTree.deepestNode().toString());
 		
 		System.out.println(binaryTree.size());
+		
+		
 	}
 
 }

@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://search.maven.org/search?q=g:junit%20AND%20a:junit
+HostUrl=https://repo1.maven.org/maven2/junit/junit/4.13/junit-4.13.jar

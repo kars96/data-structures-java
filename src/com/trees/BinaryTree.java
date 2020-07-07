@@ -5,7 +5,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BinaryTree<T extends Comparable> {
+public class BinaryTree<T extends Comparable> implements Cloneable {
 	private BTNode<T> head;
 	
 	public BinaryTree(BTNode<T> head) {
@@ -181,6 +181,45 @@ public class BinaryTree<T extends Comparable> {
 	
 	public void insert(T data) {
 		insert(new BTNode<T>(data));
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		
+		if(obj instanceof BinaryTree) {
+			return deepEquals(this.getHead(), ((BinaryTree<T>) obj).getHead());
+		}
+		return false;
+	}
+	
+	private boolean deepEquals( BTNode<T> head, BTNode<T> head2) {
+		if(head == null && head2 == null) {
+			return true;
+		} else if(head == null || head2 == null) {
+			return false;
+		}
+		
+		return head.getData().equals(head2.getData()) 
+				&& deepEquals(head.getLeft(), head2.getLeft())
+				&& deepEquals(head.getRight(), head2.getRight());
+		
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return new BinaryTree<T>(deepCopy(this.head));
+	}
+
+	private BTNode<T> deepCopy(BTNode<T> head2) {
+		if(head2 == null) {
+			return null;
+		}
+		BTNode<T> node = new BTNode<T>(head2.getData());
+		node.setLeft(deepCopy(head2.getLeft()));
+		node.setRight(deepCopy(head2.getRight()));
+		return node;
+
 	}
 	 
 }
