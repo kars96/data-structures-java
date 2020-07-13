@@ -9,6 +9,9 @@ public class LinkedList<T> {
 		this.head = head;
 	}
 
+	public LinkedList() {
+	}
+
 	public Node<T> getHead() {
 		return head;
 	}
