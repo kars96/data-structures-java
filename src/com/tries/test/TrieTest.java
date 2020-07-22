@@ -1,5 +1,6 @@
 package com.tries.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -52,5 +53,30 @@ public class TrieTest {
 		
 		Arrays.asList("th", "ans", "").forEach(
 				(str) -> assertFalse(t.search(str)));
+	}
+	
+	@Test
+	public void deleteTrieKey() throws Exception {
+		t.insert("there");
+		t.insert("the");
+		t.insert("answer");
+		t.insert("any");
+		t.insert("i");
+		
+		t.delete("the");
+		
+		assertFalse(t.search("the"));
+		
+
+		t.delete("there");
+
+		assertFalse(t.search("there"));
+		
+		try {
+			t.delete("an");
+			assertTrue(false);
+		} catch(Exception e) {
+			assertEquals("Key not found", e.getMessage());
+		}
 	}
 }

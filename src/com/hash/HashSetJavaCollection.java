@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public class HashCOllDriver {
+public class HashSetJavaCollection {
 	public static void main(String args[]) throws IllegalAccessException, IllegalArgumentException, Exception {
 		Set<Employee> s = new HashSet<>();
 		Employee e = new Employee("kar", "ham");
