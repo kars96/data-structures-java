@@ -6,9 +6,7 @@ public class Trie {
 	public Trie() {
 		head = new TrieNode();
 	}
-	
-	
-	
+		
 	public TrieNode getHead() {
 		return head;
 	}
@@ -71,8 +69,12 @@ public class Trie {
 			
 			if(node.isEndOfWord()) {
 				if(isEmpty(node)) {
+					// if node at current level does not have any child nodes
+					// it can be deleted
 					return null;
 				} else {
+					// if node at current level does have atleast one child
+					// it can't be deleted. So mark eow as false 
 					node.setEndOfWord(false);
 					return node;
 				}

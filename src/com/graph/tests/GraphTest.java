@@ -1,6 +1,7 @@
 package com.graph.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,5 +79,39 @@ public class GraphTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@Test
+	public void bfs() {
+		g = new Graph(5);
+		ArrayList<Integer> res = new ArrayList<Integer>();
+		
+		
+		try {
+			g.addEdge(0, 1);
+			g.addEdge(1, 2);
+			g.addEdge(1, 4);
+			g.addEdge(2, 3);
+			g.bfsQueue(0, (u) -> res.add(u));
+			assertEquals(Arrays.asList(0, 1,2,4,3), res);
+			
+			res.clear();
+			g.bfsQueue(1, (u) -> res.add(u));
+			assertEquals(Arrays.asList(1, 0, 2,4,3), res);
+			
+			res.clear();
+			g.bfsQueue(2, (u) -> res.add(u));
+			assertEquals(Arrays.asList(2, 1, 3, 0 ,4), res);
+			
+			g.addEdge(0, 3);
+			g.addEdge(0, 2);
+			g.removeEge(1, 4);
+			res.clear();
+			g.bfsQueue(1, (u) -> res.add(u));
+			assertEquals(Arrays.asList(1,0, 2,3 ), res);
+			
+		} catch(Exception e) {
+			assertTrue(false);
+		}
 	}
 }
